@@ -1,15 +1,16 @@
 const express = require('express') //express모드를 가져온다
 const app = express() //function이용 app을 만듬
 const port = 5000
-const bodyParser = require('body-parser')
-const {User} = require("./models/User")
+const bodyParser = require('body-parser');
+const config = require('./config/key');
+const {User} = require("./models/User");
 
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://BaekJunWon:112100@baek.vtbpeli.mongodb.net/?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
     //userNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false 안쓰면 error가 많이 발생함
 }).then(() => console.log('MongoDM Connected....'))
 .catch(err => console.log(err))
